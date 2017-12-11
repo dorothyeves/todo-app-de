@@ -65,7 +65,7 @@
         var htmlString = taskHtml(data);
         var ulTodo = $('.todo-list');
         ulTodo.append(htmlString);
-        $('toggle').click(toggleTask);
+        $('.toggle').click(toggleTask);
         $('new-todo').val('');
       });
     });
