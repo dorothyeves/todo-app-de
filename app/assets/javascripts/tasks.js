@@ -6,7 +6,7 @@
     function taskHtml(task) {
       var checkedStatus = task.done ? "checked" : "";
       var liClass = task.done ? "completed" : "";
-      var liElement = '<li><div class="view"><input class="toggle" type="checkbox" ' + "data-id='" + task.id + "'" + checkedStatus + '><label>' +
+      var liElement = '<li class="listItem-' + task.id +'" class="'+ liClass + '">' + '<div class="view"><input class="toggle" type="checkbox" ' + "data-id='" + task.id + "'" + checkedStatus + '><label>' +
       task.title +
       '</label></div></li>';
 
@@ -30,7 +30,8 @@
         _method: "PUT",
         task: {
           done: doneValue
-        }
+  
+    }
      }).success(function(data) {
       var liHtml = taskHtml(data);
       var $li = $("#listItem-" + data.id);
@@ -46,8 +47,8 @@
       $.each(data, function(index, task) {
         htmlString += taskHtml(task);
       });
-      var ulTodo = $(' .todo-list');
-      ulTodo.html(htmlString);
+      var ulTodos = $(' .todo-list');
+      ulTodos.html(htmlString);
 
       $( '.toggle').change(toggleTask);       
     });
@@ -62,12 +63,11 @@
       };
       $.post("/tasks", payload).success(function(data) {
         var htmlString = taskHtml(data);
-        var ulTodo = $('.todo-list');
-        ulTodo.append(htmlString);
+        var ulTodos = $('.todo-list');
+        ulTodos.append(htmlString);
         $('.toggle').click(toggleTask);
+      
       });
     });
-
-
 
   });
